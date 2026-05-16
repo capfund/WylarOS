@@ -23,7 +23,7 @@ ASFLAGS =
 
 ISO_DIR = $(BUILD_DIR)/iso
 GRUB_CFG = $(ISO_DIR)/boot/grub/grub.cfg
-ISO_IMAGE = $(BUILD_DIR)/BottleOS.iso
+ISO_IMAGE = $(BUILD_DIR)/WylarOS.iso
 
 ifeq ($(ARCH), x86_64)
 CFLAGS += -m64
@@ -58,7 +58,7 @@ iso: dirs $(ISO_IMAGE)
 
 $(ISO_IMAGE): $(BUILD_DIR)/kernel.bin $(GRUB_CFG)
 	grub-mkrescue -o $@ $(ISO_DIR) --modules="part_msdos part_gpt normal multiboot multiboot2" \
-		--product-name="BottleOS" --product-version="1.0"
+		--product-name="WylarOS" --product-version="1.0"
 
 $(GRUB_CFG):
 	@mkdir -p $(ISO_DIR)/boot/grub
@@ -66,7 +66,7 @@ $(GRUB_CFG):
 # cp src/disk.img $(ISO_DIR)/boot/ << DEPRECATED
 #@echo 'set gfxmode=1024x768x32' >> $(GRUB_CFG)
 # @echo 'set gfxpayload=keep' >> $(GRUB_CFG) << ALMOST FORGOT!
-	@echo 'menuentry "BottleOS" {' >> $(GRUB_CFG) 
+	@echo 'menuentry "WylarOS" {' >> $(GRUB_CFG) 
 	@echo '    multiboot2 /boot/kernel.bin' >> $(GRUB_CFG)
 	@echo '    boot' >> $(GRUB_CFG)
 	@echo '}' >> $(GRUB_CFG)

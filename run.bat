@@ -1,1 +1,1 @@
-qemu-system-x86_64 -cdrom build/BottleOS.iso -m 512M -vga std -no-reboot
+qemu-system-x86_64 -cdrom build/WylarOS.iso -m 512M -vga std -no-reboot

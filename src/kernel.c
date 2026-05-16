@@ -1,6 +1,6 @@
 #include <stdint.h>
 #include <stdbool.h>
-#include "vga.h"
+#include "vga/vga.h"
 
 void kernel_main() {
     vga_clear();

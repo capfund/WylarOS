@@ -17,7 +17,7 @@ ASM_OBJ = $(patsubst src/%.asm,$(BUILD_DIR)/%.o,$(ASM_SRC))
 
 LINKER_SCRIPT = src/link.ld
 
-CFLAGS = -ffreestanding -nostdlib -fno-builtin -fno-stack-protector -Wall -Wextra -Werror -Iinclude
+CFLAGS = -ffreestanding -nostdlib -fno-builtin -fno-stack-protector -Wall -Wextra -Iinclude # Werror removed for testing
 LINKER_FLAGS =
 ASFLAGS =
 

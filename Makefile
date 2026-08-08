@@ -10,10 +10,10 @@ ENTRY_POINT = src/entry.asm
 ENTRY_OBJ = $(BUILD_DIR)/entry.o
 
 KERNEL_SRC = $(shell find src -name "*.c")
-KERNEL_OBJ = $(patsubst src/%.c,$(BUILD_DIR)/%.o,$(KERNEL_SRC))
+KERNEL_OBJ = $(patsubst src/%.c,$(BUILD_DIR)/%.c.o,$(KERNEL_SRC))
 
-ASM_SRC = $(shell find src -name "*.asm")
-ASM_OBJ = $(patsubst src/%.asm,$(BUILD_DIR)/%.o,$(ASM_SRC))
+ASM_SRC = $(shell find src -name "*.asm" ! -path "$(ENTRY_POINT)")
+ASM_OBJ = $(patsubst src/%.asm,$(BUILD_DIR)/%.asm.o,$(ASM_SRC))
 
 LINKER_SCRIPT = src/link.ld
 
@@ -46,11 +46,11 @@ $(ENTRY_OBJ): $(ENTRY_POINT)
 	@mkdir -p $(dir $@)
 	$(AS) $(ASFLAGS) -o $@ $<
 
-$(BUILD_DIR)/%.o: src/%.c
+$(BUILD_DIR)/%.c.o: src/%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c -o $@ $< -MMD -MF $(@:.o=.d)
 
-$(BUILD_DIR)/%.o: src/%.asm
+$(BUILD_DIR)/%.asm.o: src/%.asm
 	@mkdir -p $(dir $@)
 	$(AS) $(ASFLAGS) -o $@ $<
 

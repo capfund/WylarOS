@@ -1,8 +1,7 @@
 #include "../libc/libc.h"
 #include "pic.h"
 
-void pic_remap(int offset1, int offset2)
-{
+void pic_remap(int offset1, int offset2) {
     uint8_t a1 = inb(PIC1_DATA);
     uint8_t a2 = inb(PIC2_DATA);
 
@@ -20,4 +19,23 @@ void pic_remap(int offset1, int offset2)
 
     outb(PIC1_DATA, a1);
     outb(PIC2_DATA, a2);
+}
+
+void pic_unmask(unsigned char irq) {
+    uint16_t port;
+    uint8_t val;
+
+    if (irq < 8) {
+        port = PIC1_DATA; // 0x21
+    } else {
+        port = PIC2_DATA; // 0xA1
+        irq -= 8;
+    }
+
+    val = inb(port) & ~(1 << irq);
+    outb(port, val);
+}
+
+void pic_eoi() {
+    outb(PIC1_COMMAND, 0x20); // master eoi
 }

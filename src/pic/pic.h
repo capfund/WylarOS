@@ -14,3 +14,5 @@
 #define ICW4_8086    0x01
 
 void pic_remap(int offset1, int offset2);
+void pic_unmask(unsigned char irq);
+void pic_eoi();

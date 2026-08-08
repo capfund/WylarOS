@@ -6,7 +6,7 @@ typedef struct
 {
     uint16_t LimitLow;                  // limit (bits 0-15)
     uint16_t BaseLow;                   // base (bits 0-15)
-    uint8_t BaseMiddle;                 // base (bits 16-23)
+    uint8_t BaseMiddle;                  // base (bits 16-23)
     uint8_t Access;                     // access
     uint8_t FlagsLimitHi;               // limit (bits 16-19) | flags
     uint8_t BaseHigh;                   // base (bits 24-31)
